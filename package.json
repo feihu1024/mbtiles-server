@@ -1,68 +1,72 @@
 {
-  "name": "mbtiles-server",
-  "version": "3.3.4",
-  "description": "Provides a compatible WMTS Tile Server from MBTiles.",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/DenisCarriere/mbtiles-server.git"
-  },
-  "main": "index.js",
-  "types": "index.d.ts",
-  "files": [
-    "index.js",
-    "index.d.ts",
-    "bin",
-    "config",
-    "routes",
-    "utils",
-    "public"
-  ],
-  "scripts": {
-    "start": "node ./bin/mbtiles-server.js --verbose",
-    "pretest": "standard",
-    "test": "tap test.js"
-  },
-  "bin": {
-    "mbtiles-server": "bin/mbtiles-server.js"
-  },
-  "author": "Denis Carriere <@DenisCarriere>",
-  "license": "MIT",
-  "dependencies": {
-    "@mapbox/tiletype": "^0.3.0",
-    "body-parser": "^1.15.2",
-    "conf": "^5.0.0",
-    "express": "^4.14.0",
-    "global-mercator": "3.0.3",
-    "mbtiles-offline": "^4.0.1",
-    "meow": "^5.0.0",
-    "mkdirp": "^0.5.1",
-    "serve-favicon": "^2.4.3",
-    "update-notifier": "^3.0.0",
-    "wmsc": "^0.1.1",
-    "wmts": "^2.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^12.0.10",
-    "axios": "^0.19.0",
-    "standard": "^12.0.1",
-    "tap": "^14.3.1"
-  },
-  "keywords": [
-    "gis",
-    "geo",
-    "geojs",
-    "geospatial",
-    "geography",
-    "map",
-    "mbtiles",
-    "server"
-  ],
-  "engines": {
-    "node": ">=10"
-  },
-  "standard": {
-    "ignore": [
-      "plugins/"
-    ]
-  }
+    "name": "mbtiles-server",
+    "version": "3.3.4",
+    "description": "Provides a compatible WMTS Tile Server from MBTiles.",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/DenisCarriere/mbtiles-server.git"
+    },
+    "main": "index.js",
+    "types": "index.d.ts",
+    "files": [
+        "index.js",
+        "index.d.ts",
+        "bin",
+        "config",
+        "routes",
+        "utils",
+        "public"
+    ],
+    "scripts": {
+        "start": "node ./bin/mbtiles-server.js --verbose",
+        "pretest": "standard",
+        "test": "tap test.js",
+        "debug": "node ./bin/mbtiles-server.js --cache ./test/fixtures --verbose"
+    },
+    "bin": {
+        "mbtiles-server": "bin/mbtiles-server.js"
+    },
+    "author": "Denis Carriere <@DenisCarriere>",
+    "license": "MIT",
+    "dependencies": {
+        "@mapbox/tiletype": "^0.3.0",
+        "@turf/bbox": "^7.0.0",
+        "body-parser": "^1.15.2",
+        "conf": "^5.0.0",
+        "debug": "^4.3.6",
+        "express": "^4.14.0",
+        "global-mercator": "3.0.3",
+        "lodash.omit": "^4.5.0",
+        "meow": "^5.0.0",
+        "mkdirp": "^0.5.1",
+        "serve-favicon": "^2.4.3",
+        "sqlite3": "^5.1.7",
+        "update-notifier": "^3.0.0",
+        "wmsc": "^0.1.1",
+        "wmts": "^2.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^12.0.10",
+        "axios": "^0.19.0",
+        "standard": "^12.0.1",
+        "tap": "^14.3.1"
+    },
+    "keywords": [
+        "gis",
+        "geo",
+        "geojs",
+        "geospatial",
+        "geography",
+        "map",
+        "mbtiles",
+        "server"
+    ],
+    "engines": {
+        "node": ">=10"
+    },
+    "standard": {
+        "ignore": [
+            "plugins/"
+        ]
+    }
 }
