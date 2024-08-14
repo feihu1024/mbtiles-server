@@ -1,10 +1,10 @@
 {
-    "name": "mbtiles-server",
-    "version": "3.3.4",
+    "name": "node-mbtiles-server",
+    "version": "3.4.1",
     "description": "Provides a compatible WMTS Tile Server from MBTiles.",
     "repository": {
         "type": "git",
-        "url": "git://github.com/DenisCarriere/mbtiles-server.git"
+        "url": "git@github.com:feihu1024/node-mbtiles-server.git"
     },
     "main": "index.js",
     "types": "index.d.ts",
@@ -13,6 +13,7 @@
         "index.d.ts",
         "bin",
         "config",
+        "mbtiles",
         "routes",
         "utils",
         "public"
@@ -24,13 +25,14 @@
         "debug": "node ./bin/mbtiles-server.js --cache ./test/fixtures --verbose"
     },
     "bin": {
-        "mbtiles-server": "bin/mbtiles-server.js"
+        "node-mbtiles-server": "bin/mbtiles-server.js"
     },
-    "author": "Denis Carriere <@DenisCarriere>",
+    "author": "feihu1024",
     "license": "MIT",
     "dependencies": {
         "@mapbox/tiletype": "^0.3.0",
         "@turf/bbox": "^7.0.0",
+        "bbox-dateline": "^1.2.1",
         "body-parser": "^1.15.2",
         "conf": "^5.0.0",
         "debug": "^4.3.6",
