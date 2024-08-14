@@ -19,12 +19,14 @@ module.exports.getTileParser = (schema) => {
         case 'arcgis':
         case 'google':
         case 'xyz':
-            return { schemaToTile: mercator.googleToTile, tileToSchema: mercator.tileToGoogle };
+            return { schemaToTile: (tile) => tile, tileToSchema: (tile) => tile };
+        // return { schemaToTile: mercator.googleToTile, tileToSchema: mercator.tileToGoogle }; // 疑似有误,该方法会转为MTS瓦片格式
         case 'quadkey':
         case 'quadtree':
             return { schemaToTile: mercator.quadkeyToTile, tileToSchema: mercator.tileToQuadkey };
         case 'tms':
-            return { schemaToTile: (tile) => tile, tileToSchema: (tile) => tile };
+            return { schemaToTile: mercator.googleToTile, tileToSchema: mercator.tileToGoogle };
+        // return { schemaToTile: (tile) => tile, tileToSchema: (tile) => tile }; //可能是和上面写反了？？
         default:
             throw new Error(schema + ' unknown Tile schema');
     }
