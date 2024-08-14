@@ -1,17 +1,18 @@
 #!/usr/bin/env node
-const meow = require('meow')
-const updateNotifier = require('update-notifier')
-const pkg = require('../package.json')
-const DEFAULT = require('../config')
-const server = require('../')
-const path = require('path')
+const meow = require('meow');
+const updateNotifier = require('update-notifier');
+const pkg = require('../package.json');
+const DEFAULT = require('../config');
+const server = require('../');
+const path = require('path');
 
 // Update if required
-updateNotifier({ pkg }).notify()
+updateNotifier({ pkg }).notify();
 
-const cli = meow(`
+const cli = meow(
+    `
   Usage:
-    $ mbtiles-server
+    $ node-mbtiles-server
 
   Options:
     --cache           [~/mbtiles] Cache, the directory where .mbtiles files are located.
@@ -24,21 +25,23 @@ const cli = meow(`
     --sslcert         [~/mbtiles/server.cert] Path to the file certification (.cert). For https protocol only
 
   Examples:
-    $ mbtiles-server --cache /Users/mac/mbtiles --port 5000 --verbose
-`, {
-  alias: { v: 'verbose' },
-  boolean: ['verbose']
-})
+    $ node-mbtiles-server --cache /Users/mac/mbtiles --port 5000 --verbose
+`,
+    {
+        alias: { v: 'verbose' },
+        boolean: ['verbose']
+    }
+);
 
 // Define default options
-const protocol = cli.flags.protocol || DEFAULT.PROTOCOL
-const port = cli.flags.port || DEFAULT.PORT
-const cache = cli.flags.cache || DEFAULT.CACHE
-const domain = cli.flags.domain || DEFAULT.DOMAIN
-const verbose = cli.flags.verbose || DEFAULT.VERBOSE
-const sslkey = cli.flags.sslkey || (DEFAULT.SSL_KEY || path.join(cache, 'server.key'))
-const sslcert = cli.flags.sslcert || (DEFAULT.SSL_CERT || path.join(cache, 'server.cert'))
-const watch = cli.flags.watch
+const protocol = cli.flags.protocol || DEFAULT.PROTOCOL;
+const port = cli.flags.port || DEFAULT.PORT;
+const cache = cli.flags.cache || DEFAULT.CACHE;
+const domain = cli.flags.domain || DEFAULT.DOMAIN;
+const verbose = cli.flags.verbose || DEFAULT.VERBOSE;
+const sslkey = cli.flags.sslkey || DEFAULT.SSL_KEY || path.join(cache, 'server.key');
+const sslcert = cli.flags.sslcert || DEFAULT.SSL_CERT || path.join(cache, 'server.cert');
+const watch = cli.flags.watch;
 
 // Verbose output
 const status = `
@@ -52,18 +55,18 @@ MBTiles Server
   watch:         ${watch}
   sslkey:        ${sslkey}
   sslcert:       ${sslcert}
-`
+`;
 
-const ee = server({ protocol, cache, domain, port, verbose, watch, sslkey, sslcert })
+const ee = server({ protocol, cache, domain, port, verbose, watch, sslkey, sslcert });
 
 ee.on('start', () => {
-  if (verbose) process.stdout.write(status + '\n')
-})
+    if (verbose) process.stdout.write(status + '\n');
+});
 
-ee.on('log', log => {
-  if (verbose) process.stdout.write(JSON.stringify(log) + '\n')
-})
+ee.on('log', (log) => {
+    if (verbose) process.stdout.write(JSON.stringify(log) + '\n');
+});
 
-ee.on('error', error => {
-  if (verbose) process.stdout.write(error.message + '\n')
-})
+ee.on('error', (error) => {
+    if (verbose) process.stdout.write(error.message + '\n');
+});

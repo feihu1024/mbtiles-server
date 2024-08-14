@@ -9,16 +9,20 @@
 
 Provides a compatible WMTS Tile Server from MBTiles.
 
+## 二次修改说明
+
+​ 由于该项目原作者*Denis Carriere*已不再更新维护，其所依赖的 sqlite3-offline 也停止了更新，所以该项目只能运行于 Nodejs13 及以下版本中，使用起来及其不便。因此本人对该项目进行了更新，将其所依赖的 sqlite3-offline 替换为了 sqlite3,并且修复了一些小 bug。为方便大家使用，故此重新建立该项目仓库，欢迎大家一起前来更新维护。
+
 ## Install
 
 ```bash
-$ npm install -g mbtiles-server
+$ npm install -g node-mbtiles-server
 ```
 
 ## Quickstart
 
 ```bash
-$ mbtiles-server --cache /Users/mac/mbtiles --verbose --port 3000
+$ node-mbtiles-server --cache /Users/mac/mbtiles --verbose --port 3000
 MBTiles Server Service
 
   cache:         /Users/mac/mbtiles
@@ -30,20 +34,20 @@ MBTiles Server Service
 
 ## Benchmark
 
-- 1 Active User => 400 requests/min
-- 1 Passive User => 50 requests/min
+-   1 Active User => 400 requests/min
+-   1 Passive User => 50 requests/min
 
 | Requests | Response Time |
-|-----|-----------|
-| 1   | 33.460ms  |
-| 10  | 45.223ms  |
-| 100 | 374.217ms |
-| 1K  | 2.698s    |
-| 10K | 25.457s   |
+| -------- | ------------- |
+| 1        | 33.460ms      |
+| 10       | 45.223ms      |
+| 100      | 374.217ms     |
+| 1K       | 2.698s        |
+| 10K      | 25.457s       |
 
 **Total 24,000 requests / min**
 
-Using `mbtiles-server` you could easily sustain 60 active users and up to 480 passive users. These tests were done on the server locally, network traffic and switches could slow down these results significantly.
+Using `node-mbtiles-server` you could easily sustain 60 active users and up to 480 passive users. These tests were done on the server locally, network traffic and switches could slow down these results significantly.
 
 ## CLI Help
 
@@ -53,7 +57,7 @@ For any additional help using the CLI, use the `--help` flag.
   Provides a compatible WMTS Tile Server from MBTiles.
 
   Usage
-    $ mbtiles-server
+    $ node-mbtiles-server
 
   Options
     --cache           [~/mbtiles] Cache
@@ -61,46 +65,47 @@ For any additional help using the CLI, use the `--help` flag.
     --port            [5000] Port
     --domain          [localhost] Domain
     --verbose         [false] Verbose output
-    --sslkey          [~/mbtiles/server.key] Path to the file certification (.key). For https protocol only  
+    --sslkey          [~/mbtiles/server.key] Path to the file certification (.key). For https protocol only
     --sslcert         [~/mbtiles/server.cert] Path to the file certification (.cert). For https protocol only
-  
+
   Examples
-    $ mbtiles-server --cache /Users/mac/mbtiles --port 5000 --verbose
+    $ node-mbtiles-server --cache /Users/mac/mbtiles --port 5000 --verbose
 ```
 
 ## Environment Variables
 
 Environment variables can be defined instead of entering your options via the CLI.
 
-- `MBTILES_SERVER_CACHE`
-- `MBTILES_SERVER_PROTOCOL`
-- `MBTILES_SERVER_PORT`
-- `MBTILES_SERVER_DOMAIN`
-- `MBTILES_SERVER_VERBOSE`
-- `MBTILES_SERVER_SSL_KEY`
-- `MBTILES_SERVER_SSL_CERT`
+-   `MBTILES_SERVER_CACHE`
+-   `MBTILES_SERVER_PROTOCOL`
+-   `MBTILES_SERVER_PORT`
+-   `MBTILES_SERVER_DOMAIN`
+-   `MBTILES_SERVER_VERBOSE`
+-   `MBTILES_SERVER_SSL_KEY`
+-   `MBTILES_SERVER_SSL_CERT`
 
 ## Docker
 
 A Dockerfile is provided for easy Docker deployment
 
 ```bash
-$ docker build -t mbtiles-server .
+$ docker build -t node-mbtiles-server .
 $ docker run --rm -it \
   -p 5000:5000 \
   -v ~/mbtiles/:/root/mbtiles \
-  mbtiles-server
+  node-mbtiles-server
 ```
+
 **Start containers automatically**
 
 <https://docs.docker.com/engine/admin/host_integration/>
 
 ```bash
 $ docker run -d \
-  --name mbtiles-server \
+  --name node-mbtiles-server \
   -p 5000:5000 \
   -v ~/mbtiles/:/root/mbtiles \
-  mbtiles-server
+  node-mbtiles-server
 ```
 
 ## WMTS
@@ -124,5 +129,5 @@ manipulation or geo-processing.
 **Examples**
 
 ```javascript
-server({cache: '/Users/mac/mbtiles', port: 5000, verbose: true})
+server({ cache: '/Users/mac/mbtiles', port: 5000, verbose: true });
 ```
