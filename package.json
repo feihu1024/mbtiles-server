@@ -22,7 +22,9 @@
         "start": "node ./bin/mbtiles-server.js --verbose",
         "pretest": "standard",
         "test": "tap test.js",
-        "debug": "node ./bin/mbtiles-server.js --cache ./test/fixtures --verbose"
+        "debug": "node ./bin/mbtiles-server.js --cache ./test/fixtures --verbose",
+        "docker:tag": "docker build -t feihu1024/node-mbtiles-server .",
+        "docker:push": "docker push feihu1024/node-mbtiles-server"
     },
     "bin": {
         "node-mbtiles-server": "bin/mbtiles-server.js"
